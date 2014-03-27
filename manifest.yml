@@ -1,5 +1,0 @@
----
-applications:
-- name: health-mgr-demo
-  memory: 256M
-  instances: 2
