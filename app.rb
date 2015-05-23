@@ -16,12 +16,12 @@ module App
       logger.debug "debug message"
       logger.info "info message"
       port = ENV['VCAP_APP_PORT']
-      "\n<h1>Hello DevBeat 2013 from port #{port}!!</h1>\n"
+      "\n<h1>Hello World from port #{port}!!</h1>\n"
     end
 
     get "/broken" do
       logger.debug "trying broken service"
-      `ps -AF | grep -m1 "ruby" | awk '{print $2;}' | (read pid; kill $pid)`
+      `ps -AF | grep -m1 "ruby" | awk '{print $2;}' | (read pid; kill -9 $pid)`
     end
     run!
   end
