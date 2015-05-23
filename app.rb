@@ -5,6 +5,7 @@ module App
 
     configure do
       enable :logging
+      set :raise_errors, true
     end
 
     before do
@@ -22,6 +23,11 @@ module App
     get "/broken" do
       logger.debug "trying broken service"
       `ps -AF | grep -m1 "ruby" | awk '{print $2;}' | (read pid; kill -9 $pid)`
+    end
+    
+    get "/systemcrash" do
+      logger.debug "trying broken service"
+      Kernel.exit!
     end
     run!
   end
