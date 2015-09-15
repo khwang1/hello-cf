@@ -1,5 +1,7 @@
-require "sinatra/base"
+#require "sinatra/base"
+require 'sinatra'
 require 'json'
+require 'pp'
 
 module App
   class Main < Sinatra::Base
@@ -20,8 +22,9 @@ module App
       port = ENV['VCAP_APP_PORT']
       vcap_application=JSON.parse(ENV['VCAP_APPLICATION'] || '{}')
       instance_number = vcap_application['instance_index']
+      dea_host = vcap_application['host']
 
-      "\n<h1>Hello World!</h1> \n <h2>from</h2>\n <h2>instance:#{instance_number}</h2>\n <h2>port:#{port}</h2>\n"
+      erb :index, locals: {instance: instance_number, port: port, dea: dea_host}
     end
 
     get "/broken" do
