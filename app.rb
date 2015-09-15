@@ -1,4 +1,5 @@
 require "sinatra/base"
+require 'json'
 
 module App
   class Main < Sinatra::Base
@@ -17,7 +18,10 @@ module App
       logger.debug "debug message"
       logger.info "info message"
       port = ENV['VCAP_APP_PORT']
-      "\n<h1>Hello World from port #{port}!!</h1>\n"
+      vcap_application=JSON.parse(ENV['VCAP_APPLICATION'] || '{}')
+      instance_number = vcap_application['instance_index']
+
+      "\n<h1>Hello World!</h1> \n <h2>from</h2>\n <h2>instance:#{instance_number}</h2>\n <h2>port:#{port}</h2>\n"
     end
 
     get "/broken" do
