@@ -21,13 +21,28 @@
         <input type="text" name="subject" value="hello world"> 
         <br><br>
         Body:
-        <textarea cols="25" rows="10" name="body"><%= "Greetings from instance #{instance} of '#{app}' app running on Cloud Foundry PWS!"%> </textarea>
+        <textarea cols="25" rows="10" name="body"><%= "Greetings from instance #{instance} of '#{app}' app running on Cloud Foundry PWS!" %> </textarea>
         <br><br>
         <input type="submit" value="Send the Email">
     </form>
 <%else %>
     <h2> Can't send mail :( </h2>
-<% end %>
+    <form action="/send_email" method="post">
+        From:
+        <input type="text" name="from" disabled> 
+        <br><br>
+         To:
+        <input type="text" name="to" disabled> 
+        <br><br>
+       Subject:
+        <input type="text" name="subject" value="hello world" disabled> 
+        <br><br>
+        Body:
+        <textarea cols="25" rows="10" name="body" disabled><%= "Greetings from instance #{instance} of '#{app}' app running on Cloud Foundry PWS!" %> </textarea>
+        <br><br>
+        <input type="submit" value="Send the Email" disabled>
+    </form>
+<<% end %>
 <p><a href="/systemcrash">Kill this instance</a></p>
 
 
