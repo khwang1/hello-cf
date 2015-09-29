@@ -28,19 +28,25 @@ module App
 
             sendgrid = Hash.new
             logger.info '-------------------------'
+            logger.info "ENV['VCAP_SERVICES']"
             logger.info ENV['VCAP_SERVICES'].class
-            logger.info  ENV['VCAP_SERVICES']
+            logger.info ENV['VCAP_SERVICES']
             logger.info '-------------------------'
 
             vcap_services=JSON.parse(ENV['VCAP_SERVICES'] || '{}')
-            logger.info pp vcap_services
             if !vcap_services.empty?
                 vcap_sendgrid =vcap_services["sendgrid"]
+                logger.info '-------------------------'
+                logger.info "VCAP_SERIVCE SENDGRID"
                 logger.info vcap_sendgrid
                 logger.info vcap_sendgrid.class
+                logger.info '-------------------------'
                 if !vcap_sendgrid.nil? 
                     sendgrid = vcap_sendgrid.first["credentials"]
-                    logger.info sendgrid
+                logger.info '-------------------------'
+                logger.info "SENDGRID CREDENTIALS"
+                logger.info sendgrid
+                logger.info '-------------------------'
                 end
             end
 
@@ -56,10 +62,13 @@ module App
             body = params[:body]
 
 
+            logger.info '-------------------------'
+            logger.info 'Email params'
             logger.info "to:#{to}"
             logger.info "from:#{from}"
             logger.info "subject#{subject}"
             logger.info "body:#{body}"
+            logger.info '-------------------------'
 
             sendgrid = nil
             vcap_services=JSON.parse(ENV['VCAP_SERVICES'] || '{}')
