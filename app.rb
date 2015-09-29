@@ -24,7 +24,37 @@ module App
       instance_number = vcap_application['instance_index']
       dea_host = vcap_application['host']
 
-      erb :index, locals: {instance: instance_number, port: port, dea: dea_host}
+
+      sendgrid = Hash.new
+=begin
+      puts ENV['VCAP_SERVICES']
+      if (!ENV['VCAP_SERVICES'].nil? && !ENV['VCAP_SERVICES'].blank?)
+          JSON.parse(ENV['VCAP_SERVICES']).each do |k,v|
+              if !k.scan("sendgrid").blank?
+                  credentials = v.first.select {|k1,v1| k1 == "credentials"}["credentials"]
+                  host = credentials["hostname"]
+                  username = credentials["username"]
+                  password = credentials["password"]
+                  sendgrid = {:host => host, :username => username, :password => password}
+              end
+          end
+      end
+=end
+    
+      vcap_services=JSON.parse(ENV['VCAP_SERVICES'] || '{}')
+      logger.info pp vcap_services
+      if !vcap_services.empty?
+          vcap_sendgrid =vcap_services["sendgrid"]
+          logger.info vcap_sendgrid
+          logger.info vcap_sendgrid.class
+          if !vcap_sendgrid.nil? 
+             sendgrid = vcap_sendgrid.first["credentials"]
+             logger.info sendgrid
+          end
+      end
+
+
+      erb :index, locals: {instance: instance_number, port: port, dea: dea_host, sendgrid: sendgrid}
     end
 
     get "/broken" do
