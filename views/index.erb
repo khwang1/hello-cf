@@ -3,6 +3,8 @@
 <h2>Instance: <%=instance%></h2>
 <!--<h2>instance: <%=instance%> running on DEA port: <%=port%></h2>-->
  
+<hr/>
+
 <% if !sendgrid.empty? %>
     <h2> Yes, we CAN send email :) </h2>
 
@@ -30,6 +32,7 @@
     </form>
 <%else %>
     <h2> Can't send mail :( </h2>
+<!--
     <form action="/send_email" method="post">
         From:
         <input type="text" name="from" disabled> 
@@ -45,6 +48,8 @@
         <br><br>
         <input type="submit" value="Send the Email" disabled>
     </form>
+    -->
 <% end %>
+<hr/>
 <p><a href="/systemcrash">Kill this instance</a></p>
 
