@@ -62,6 +62,22 @@ module App
             erb :index, locals: {instance: instance_number, port: port, dea: dea_host, sendgrid: sendgrid}
         end
 
+        post "/send_email" do
+            logger.info 'In /send_email'
+            to = params[:to]
+            from = params[:from]
+            subject = params[:subject]
+            body = params[:body]
+
+
+            logger.info "to:#{to}"
+            logger.info "from:#{from}"
+            logger.info "subject#{subject}"
+            logger.info "body:#{body}"
+
+            redirect "/"
+        end
+
         get "/broken" do
             logger.debug "trying broken service"
             `ps -AF | grep -m1 "ruby" | awk '{print $2;}' | (read pid; kill -9 $pid)`
