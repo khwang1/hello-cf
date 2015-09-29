@@ -1,13 +1,16 @@
 <h1><center>Hello World!</center></h1> 
-<h2>from</h2> 
 
-<h2>instance: <%=instance%> running on DEA port: <%=port%></h2>
+<h2>Instance: <%=instance%></h2>
+<!--<h2>instance: <%=instance%> running on DEA port: <%=port%></h2>-->
  
 <% if !sendgrid.empty? %>
     <h2> Yes, we CAN send email :) </h2>
+
+    <!--
     host: <%=sendgrid["hostname"]%> </br>
     username: <%=sendgrid["username"]%> </br>
     password: <%=sendgrid["password"]%> </br>
+    -->
 
     <br>
     <form action="/send_email" method="post">
@@ -21,7 +24,7 @@
         <input type="text" name="subject" value="hello world"> 
         <br><br>
         Body:
-        <textarea cols="25" rows="10" name="body"><%= "Greetings from instance #{instance} of '#{app}' app running on Cloud Foundry PWS!" %> </textarea>
+        <textarea cols="25" rows="10" name="body"><%= "Greeting from instance #{instance} of '#{app}' app running on Cloud Foundry PWS!" %> </textarea>
         <br><br>
         <input type="submit" value="Send the Email">
     </form>
@@ -42,8 +45,6 @@
         <br><br>
         <input type="submit" value="Send the Email" disabled>
     </form>
-<<% end %>
+<% end %>
 <p><a href="/systemcrash">Kill this instance</a></p>
-
-
 
