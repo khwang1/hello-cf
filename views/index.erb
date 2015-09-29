@@ -21,7 +21,7 @@
         <input type="text" name="subject" value="hello world"> 
         <br><br>
         Body:
-        <textarea cols="25" rows="10" name="body"> </textarea>
+        <textarea cols="25" rows="10" name="body"><%= "Greetings from instance #{instance} of '#{app}' app running on Cloud Foundry PWS!"%> </textarea>
         <br><br>
         <input type="submit" value="Send the Email">
     </form>
