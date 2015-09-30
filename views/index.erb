@@ -32,24 +32,7 @@
     </form>
 <%else %>
     <h2> Can't send mail :( </h2>
-<!--
-    <form action="/send_email" method="post">
-        From:
-        <input type="text" name="from" disabled> 
-        <br><br>
-         To:
-        <input type="text" name="to" disabled> 
-        <br><br>
-       Subject:
-        <input type="text" name="subject" value="hello world" disabled> 
-        <br><br>
-        Body:
-        <textarea cols="25" rows="10" name="body" disabled><%= "Greetings from instance #{instance} of '#{app}' app running on Cloud Foundry PWS!" %> </textarea>
-        <br><br>
-        <input type="submit" value="Send the Email" disabled>
-    </form>
-    -->
 <% end %>
 <hr/>
-<p><h2><a href="/systemcrash">Kill this instance</a></h2></p>
+<p><h2><a href="/systemcrash">Kill an instance</a></h2></p>
 
