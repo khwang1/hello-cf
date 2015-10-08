@@ -42,7 +42,7 @@ module App
                 vcap_sendgrid =vcap_services['sendgrid']
                 if !vcap_sendgrid.nil?  && vcap_sendgrid.first["name"] == SENDGRID_SERVICE_INSTANCE_NAME
                     logger.info '-------------------------'
-                    logger.info "VCAP_SERIVCE '#{SENDGRID_SERVICE_NAME}'"
+                    logger.info "VCAP_SERIVCE '#{SENDGRID_SERVICE_INSTANCE_NAME}'"
                     logger.info vcap_sendgrid
                     logger.info vcap_sendgrid.class
                     logger.info '-------------------------'
