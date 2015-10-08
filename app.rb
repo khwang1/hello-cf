@@ -4,7 +4,10 @@ require 'pp'
 require 'pony'
 
 module App
+
     class Main < Sinatra::Base
+
+        SENDGRID_SERVICE_NAME='sendgrid'
 
         configure do
             enable :logging
@@ -35,18 +38,18 @@ module App
 
             vcap_services=JSON.parse(ENV['VCAP_SERVICES'] || '{}')
             if !vcap_services.empty?
-                vcap_sendgrid =vcap_services["sendgrid"]
-                logger.info '-------------------------'
-                logger.info "VCAP_SERIVCE SENDGRID"
-                logger.info vcap_sendgrid
-                logger.info vcap_sendgrid.class
-                logger.info '-------------------------'
+                vcap_sendgrid =vcap_services[SENDGRID_SERVICE_NAME]
                 if !vcap_sendgrid.nil? 
+                    logger.info '-------------------------'
+                    logger.info "VCAP_SERIVCE '#{SENDGRID_SERVICE_NAME}'"
+                    logger.info vcap_sendgrid
+                    logger.info vcap_sendgrid.class
+                    logger.info '-------------------------'
                     sendgrid = vcap_sendgrid.first["credentials"]
-                logger.info '-------------------------'
-                logger.info "SENDGRID CREDENTIALS"
-                logger.info sendgrid
-                logger.info '-------------------------'
+                    logger.info '-------------------------'
+                    logger.info "SENDGRID CREDENTIALS"
+                    logger.info sendgrid
+                    logger.info '-------------------------'
                 end
             end
 
