@@ -7,7 +7,8 @@ module App
 
     class Main < Sinatra::Base
 
-        SENDGRID_SERVICE_NAME='sendgrid'
+        SENDGRID_SERVICE_INSTANCE_NAME= 'my-sendgrid'
+
 
         configure do
             enable :logging
@@ -38,8 +39,8 @@ module App
 
             vcap_services=JSON.parse(ENV['VCAP_SERVICES'] || '{}')
             if !vcap_services.empty?
-                vcap_sendgrid =vcap_services[SENDGRID_SERVICE_NAME]
-                if !vcap_sendgrid.nil? 
+                vcap_sendgrid =vcap_services['sendgrid']
+                if !vcap_sendgrid.nil?  && vcap_sendgrid.first["name"] == SENDGRID_SERVICE_INSTANCE_NAME
                     logger.info '-------------------------'
                     logger.info "VCAP_SERIVCE '#{SENDGRID_SERVICE_NAME}'"
                     logger.info vcap_sendgrid
